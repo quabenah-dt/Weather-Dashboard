@@ -16,9 +16,12 @@
     
   /* Fonts */
 
-    --main-font: 'Futura PT Extra Bold';
-    --heading: 'Futura PT Bold';
-    --normal: 'Futura PT Heavy';
+  --font-light: 'Lexend Light';
+  --font-regular: 'Lexend Regular';
+  --font-medium: 'Lexend Medium';
+  --font-semibold: 'Lexend SemiBold';
+  --font-bold: 'Lexend Bold';
+  --font-extrabold: 'Lexend ExtraBold';
 
 }
 
@@ -34,6 +37,8 @@
     padding: 0;
     /* min-height: 100vh; */
     align-items: center;
+    background-color: var(--main-color);
+    color: var(--secondary-color);
     
   }
 
