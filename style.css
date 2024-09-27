@@ -1,14 +1,20 @@
 :root{
+  /* Colors */
+
     --main-color: #000000;
     --secondary-color: #fff;
     --tertiary-color: #000;
     --bg-gradient: linear-gradient(to right, #6a11cb, #2575fc);
+
+  /* Font Sizes */
 
     --xs-font: 29px;
     --s-font: 40px;
     --regular-font: 47px;
     --large-font: 57px; 
     --number: 70px;
+    
+  /* Fonts */
 
     --main-font: 'Futura PT Extra Bold';
     --heading: 'Futura PT Bold';
@@ -30,3 +36,4 @@
     align-items: center;
     
   }
+
