@@ -122,16 +122,11 @@
     /* padding: 0 20px; */
     font-size: var(--regular-font);
   }
-  /* Hide search icon when input is focused
-  .search input:focus + .material-symbols-outlined {
-    opacity: 0;
+
+  /* Hide placeholder text when input is focused */
+  .search input:focus::placeholder {
+    color: transparent;
   }
-
-  /* Adjust input padding when focused to maintain consistent appearance */
-  /* .search input:focus {
-    padding-left: 20px;
-  } */
-
   /* Avatar container styles */
   .avatar{
     display: flex;
@@ -144,6 +139,89 @@
   .avatar img:hover{
     transform: scale(1.1);
   }
+
+
+  /* Weather Info and Details Styling */
+
+  /* Main weather information container */
+  .weatherinfo {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+  }
+
+  /* Weather details container */
+  .weather-details {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+  }
+
+  /* Flex layout for weather details */
+  .weather-details {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  /* Individual weather detail item */
+  .weather-details-item {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px;
+    width: calc(25% - 20px);
+    min-width: 200px;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+
+  /* Hover effect for weather detail items */
+  .weather-details-item:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Weather detail item icon */
+  .weather-details-item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  /* General styling for paragraphs in weather detail items */
+  .weather-details-item p {
+    margin: 5px 0;
+  }
+
+  /* Styling for the title of each weather detail item */
+  .weather-details-item p:nth-child(2) {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+  /* Styling for the main value of each weather detail item */
+  .weather-details-item p:nth-child(3) {
+    font-size: 1.2em;
+    color: var(--primary-color);
+  }
+
+  /* Styling for the timestamp of each weather detail item */
+  .weather-details-item p:nth-child(4) {
+    font-size: 0.9em;
+    color: var(--secondary-color);
+  }
+
 
 
 
