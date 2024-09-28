@@ -3,7 +3,6 @@
 
     --main-color: #FFFFFF;
     --secondary-color: rgba(0, 0, 0, 0.25);
-    --tertiary-color: #000000;
     --bg-gradient1: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.29735644257703087) 0%);
     --bg-gradient2: rgba(255, 255, 255, 0.2);
 
@@ -32,348 +31,94 @@
     margin: 0;
     padding: 0;
   }
-  
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    color: var(--secondary-color);
-    font-family: var(--font-regular);
-  }
 
+  htm {
+    font-family: var(--font-regular);
+    font-size: var(--regular-font);
+    scroll-behavior: smooth;
+  }
+  
   body {
     background-image: url(./Assets/images/bg.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    overflow-y: auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr; /* 2 equal columns */
-    grid-gap: 20px; /* spacing between the columns */
-    padding: 20px;
-    max-width: 1440px; /* Adjust as needed */
-    margin: 0 auto;
-    /* height: 100vh; */
+    overflow-y: hidden;
   }
 
-  /* Header */
+/* Header */
 
-  /* Header styles */
-  .header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    height: 100px;
-   
+  .header {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Distribute items evenly along the main axis */
+    align-items: center; /* Center items vertically */
+    padding: 10px; /* Add padding around the header */
+    height: 100px; /* Set a fixed height for the header */
   }
 
-  /* Logo container styles */
-  .logo{
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  .logo {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    padding-left: 20px; /* Add left padding to the logo */
   }
 
-  /* Logo text styles */
-  .logo h1{
-    font-size: var(--large-font);
-    font-family: var(--font-extrabold);
-  } 
-
-  /* Search container styles */
-  .search{
-    position: relative;
-    display: flex;
-    align-items: center;
+  .logo img {
+    height: 70px; /* Set a fixed height for the logo image */
   }
 
-  /* Search input styles */
-  .search input{
-    border: none;
-    outline: none;
-    padding: 20px;
-    width: 664px;
-    /* height: 60px; */
-    border-radius: 25px;
-    background: var(--bg-gradient1);
-    color: var(--main-color);
-    /* width: 100%; */
-    backdrop-filter: blur(34px);
-    /* box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); */
-    border: 3px solid var(--bg-gradient2) ; /* Changed to a visible, semi-transparent white border */
+  .search input {
+    border: none; /* Remove default border */
+    outline: none; /* Remove default outline */
+    padding: 15px; /* Add padding inside the input */
+    width: 664px; /* Set a fixed width for the input */
+    border-radius: 25px; /* Round the corners of the input */
+    background-color: var(--bg-gradient1); /* Use custom gradient background */
+    color: var(main); /* Set text color */
+    backdrop-filter: blur(34px); /* Apply blur effect to background */
+    border: 3px solid var(--bg-gradient2); /* Add a border with custom color */
+    /* margin-bottom: 20px; */ /* Commented out bottom margin */
   }
 
-  /* Search icon styles */
+  .search input::placeholder {
+    color: var(--secondary-color); /* Set placeholder text color */
+    text-align: center; /* Center the placeholder text */
+  }
+
+  .search {
+    position: relative; /* Enable positioning for child elements */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+  }
+
   .search .material-symbols-outlined {
-    position: absolute;
-    left: 50px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: rgba(0, 0, 0, 0.25);
-    /* font-size: 24px; */
-    z-index: 1;
-    height: 24px;
-    width: 24px;
+    position: absolute; /* Position the icon absolutely within .search */
+    left: 15px; /* Position from the left edge */
+    top: 50%; /* Position vertically in the middle */
+    transform: translateY(-50%); /* Adjust vertical position for perfect centering */
+    color: var(--secondary-color); /* Set icon color */
+    z-index: 1; /* Ensure icon appears above other elements */
+    height: 24px; /* Set icon height */
+    width: 24px; /* Set icon width */
+    pointer-events: none; /* Prevent icon from intercepting mouse events */
   }
 
-  /* Search input placeholder styles */
-  .search input::placeholder{
-    color: var(--secondary-color);
-    text-align: center;
-    /* padding: 0 20px; */
-    font-size: var(--regular-font);
+  .search input {
+    padding-left: 45px; /* Add left padding to accommodate the search icon */
   }
 
-  /* Hide placeholder text when input is focused */
-  .search input:focus::placeholder {
-    color: transparent;
-  }
-  /* Avatar container styles */
-  .avatar{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 10px; /* Added to bring the avatar down a little */
-  }  
-
-  /* Avatar image hover effect */
-  .avatar img:hover{
-    transform: scale(1.1);
+  .avatar {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
   }
 
-
-  /* Weather Info and Details Styling */
-
-  /* Main weather information container */
-  /* Main weather information container */
-  .weatherinfo {
-    background: var(--bg-gradient2);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid var(--bg-gradient2);
-    box-shadow: 0 4px 6px var(--secondary-color);
-    padding: 20px;
-    margin: 10px;
-    
-    height: 370px; /* Allow height to adjust to content */
-    grid-column: 1;
-    grid-row: 2;
+  .avatar img {
+    height: 70px; /* Set avatar image height */
+    width: 70px; /* Set avatar image width */
+    margin-bottom: 10px; /* Add bottom margin to the avatar image */
   }
 
-  /* Weather details container */
-  .weather-details {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    background: var(--bg-gradient2);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid var(--bg-gradient2);
-    box-shadow: 0 4px 6px var(--secondary-color);
-    padding: 10px;
-    margin: 10px;
-    width: 664px;
-    height: 468px;
-    grid-column: 2;
-    grid-row: 2;
-    /* overflow: hidden; */
-  }
-
- 
-
-  /* Individual weather detail item */
-  .weather-details-item {
-    background: var(--bg-gradient2);
-    backdrop-filter: blur(5px);
-    border-radius: 15px;
-    border: 1px solid var(--bg-gradient2);
-    box-shadow: 0 2px 4px var(--secondary-color);
-    padding: 20px; /* Changed from 15px to 20px for consistency */
-    margin: 10px;
-    width: 259px; /* Kept the specific width */
-    height: 201px; /* Kept the specific height */
-    text-align: center;
-    transition: transform 0.3s ease;
-    width: calc(50% - 20px); /* Two items per row with gap */
-    height: auto;
-    min-height: 201px;
-  }
-
-  /* Hover effect for weather detail items */
-  .weather-details-item:hover {
-    transform: translateY(-5px);
-  }
-
-  /* Weather detail item icon */
-  .weather-details-item img {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
-  }
-
-  /* General styling for paragraphs in weather detail items */
-  .weather-details-item p {
-    margin: 5px 0;
-  }
-
-  /* Styling for the title of each weather detail item */
-  .weather-details-item p:nth-child(2) {
-    font-family: var(--font-semibold);
-    font-size: var(--regular-font);
-  }
-
-  /* Styling for the main value of each weather detail item */
-  .weather-details-item p:nth-child(3) {
-    font-size: var(--large-font);
-    color: var(--main-color);
-  }
-
-  /* Styling for the timestamp of each weather detail item */
-  .weather-details-item p:nth-child(4) {
-    font-size: var(--xxs-font);
-    color: var(--secondary-color);
-  }
-
-/* Weather Details 2 */
-
-  /* Weather Details 2 */
-  .weather-details-2 {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 5px;
-    margin: 10px;
-    /* width: 664px; */
-    /* height: 468px; */
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .weather-details-2 .weather-details-item {
-    background: var(--bg-gradient2);
-    backdrop-filter: blur(5px);
-    border-radius: 15px;
-    border: 1px solid var(--bg-gradient2);
-    box-shadow: 0 2px 4px var(--secondary-color);
-    padding: 20px; /* Changed from 15px to 20px for consistency */
-    margin: 10px;
-    width: 320px;
-    height: 216px;
-    text-align: center;
-    transition: transform 0.3s ease;
-    width: calc(50% - 20px); /* Two items per row with gap */
-    height: auto;
-    min-height: 201px;
-  }
-
-  .weather-details-2 .weather-details-item:hover {
-    transform: translateY(-5px);
-  }
-
-  .weather-details-2 .weather-details-item img {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
-  }
-
-  .weather-details-2 .weather-details-item p {
-    margin: 5px 0;
-  }
-
-  .weather-details-2 .weather-details-item p:nth-child(2) {
-    font-family: var(--font-semibold);
-    font-size: var(--regular-font);
-  }
-
-  .weather-details-2 .weather-details-item p:nth-child(3) {
-    font-size: var(--large-font);
-    color: var(--main-color);
-  }
-
-  .weather-details-2 .weather-details-item p:nth-child(4) {
-    font-size: var(--xxs-font);
-    color: var(--secondary-color);
-  }
-
-  .weekly-report {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    background: var(--bg-gradient2);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid var(--bg-gradient2);
-    box-shadow: 0 4px 6px var(--secondary-color);
-    padding: 10px;
-    margin: 20px;
-    width: 664px;
-    height: 468px;
-  }
-
-  .weekly-report .weekly-report-item {
-    background: var(--bg-gradient2);
-    backdrop-filter: blur(5px);
-    border-radius: 15px;
-    border: 1px solid var(--bg-gradient2);
-    box-shadow: 0 2px 4px var(--secondary-color);
-    padding: 20px;
-    margin: 10px;
-    
-    text-align: center;
-    transition: transform 0.3s ease;
-  }
-
-  .weekly-report .weekly-report-item:hover {
-    transform: translateY(-5px);
-  }
-
-  .weekly-report .weekly-report-item img {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 10px;
-  }
-
-  .weekly-report .weekly-report-item p {
-    margin: 5px 0;
-  }
-
-  .weekly-report .weekly-report-item p:nth-child(2) {
-    font-family: var(--font-semibold);
-    font-size: var(--regular-font);
-  }
-
-  .weekly-report .weekly-report-item p:nth-child(3) {
-    font-size: var(--large-font);
-    color: var(--main-color);
-  }
-
-  .weekly-report .weekly-report-item p:nth-child(4) {
-    font-size: var(--xxs-font);
-    color: var(--secondary-color);
-  }
+/* Header End */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* Responsive */
   
