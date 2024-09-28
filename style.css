@@ -144,23 +144,24 @@
   /* Weather Info and Details Styling */
 
   /* Main weather information container */
+  /* Main weather information container */
   .weatherinfo {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-gradient2);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--bg-gradient2);
+    box-shadow: 0 4px 6px var(--secondary-color);
     padding: 20px;
     margin: 20px;
   }
 
   /* Weather details container */
   .weather-details {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--bg-gradient2);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--bg-gradient2);
+    box-shadow: 0 4px 6px var(--secondary-color);
     padding: 20px;
     margin: 20px;
   }
@@ -174,11 +175,11 @@
 
   /* Individual weather detail item */
   .weather-details-item {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--bg-gradient2);
     backdrop-filter: blur(5px);
     border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--bg-gradient2);
+    box-shadow: 0 2px 4px var(--secondary-color);
     padding: 15px;
     margin: 10px;
     width: calc(25% - 20px);
@@ -206,28 +207,21 @@
 
   /* Styling for the title of each weather detail item */
   .weather-details-item p:nth-child(2) {
-    font-weight: bold;
-    font-size: 1.1em;
+    font-family: var(--font-semibold);
+    font-size: var(--regular-font);
   }
 
   /* Styling for the main value of each weather detail item */
   .weather-details-item p:nth-child(3) {
-    font-size: 1.2em;
-    color: var(--primary-color);
+    font-size: var(--large-font);
+    color: var(--main-color);
   }
 
   /* Styling for the timestamp of each weather detail item */
   .weather-details-item p:nth-child(4) {
-    font-size: 0.9em;
+    font-size: var(--xxs-font);
     color: var(--secondary-color);
   }
-
-
-
-
-
-
-
 
 
 
