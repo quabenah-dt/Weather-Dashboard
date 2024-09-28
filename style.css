@@ -48,6 +48,13 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 equal columns */
+    grid-gap: 20px; /* spacing between the columns */
+    padding: 20px;
+    max-width: 1400px; /* Adjust as needed */
+    margin: 0 auto;
+    height: 100vh;
   }
 
   /* Header */
@@ -59,6 +66,7 @@
     align-items: center;
     padding: 0 20px;
     height: 100px;
+    grid-column: 1 / -1; /* Span full width */
   }
 
   /* Logo container styles */
@@ -148,14 +156,16 @@
     box-shadow: 0 4px 6px var(--secondary-color);
     padding: 20px;
     margin: 20px;
-    width: 664px;
-    height: 370px;
+    width: 664px; /* Remove fixed width */
+    height: 370px; /* Allow height to adjust to content */
+    grid-column: 1;
+    grid-row: 2;
   }
 
   /* Weather details container */
   .weather-details {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
     background: var(--bg-gradient2);
     backdrop-filter: blur(10px);
@@ -166,6 +176,9 @@
     margin: 20px;
     width: 664px;
     height: 468px;
+    grid-column: 2;
+    grid-row: 2;
+    overflow: hidden;
   }
 
  
@@ -183,6 +196,9 @@
     height: 201px; /* Kept the specific height */
     text-align: center;
     transition: transform 0.3s ease;
+    width: calc(50% - 20px); /* Two items per row with gap */
+    height: auto;
+    min-height: 201px;
   }
 
   /* Hover effect for weather detail items */
@@ -234,8 +250,16 @@
     /* box-shadow: 0 4px 6px var(--secondary-color); */
     padding: 10px;
     margin: 20px;
-    width: 664px;
-    height: 468px;
+    width: auto; /* Remove fixed width */
+    height: auto; /* Allow height to adjust to content */
+    min-height: 468px; /* Minimum height */
+    grid-column: 1;
+    grid-row: 3;
+    background: var(--bg-gradient2); /* Add background */
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid var(--bg-gradient2);
+    box-shadow: 0 4px 6px var(--secondary-color);
   }
 
   .weather-details-2 .weather-details-item {
@@ -250,6 +274,9 @@
     height: 201px; /* Kept the specific height */
     text-align: center;
     transition: transform 0.3s ease;
+    width: calc(50% - 20px); /* Two items per row with gap */
+    height: auto;
+    min-height: 201px;
   }
 
   .weather-details-2 .weather-details-item:hover {
@@ -292,8 +319,8 @@
     box-shadow: 0 4px 6px var(--secondary-color);
     padding: 10px;
     margin: 20px;
-    width: 664px;
-    height: 468px;
+    /* width: 664px; */
+    /* height: 468px; */
   }
 
   .weekly-report .weekly-report-item {
