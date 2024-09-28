@@ -49,12 +49,12 @@
     background-attachment: fixed;
     overflow-y: auto;
     display: grid;
-    grid-template-columns: 1fr 1fr; /* 2 equal columns */
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* 2 equal columns */
     grid-gap: 20px; /* spacing between the columns */
     padding: 20px;
-    max-width: 1400px; /* Adjust as needed */
+    max-width: 1440px; /* Adjust as needed */
     margin: 0 auto;
-    height: 100vh;
+    /* height: 100vh; */
   }
 
   /* Header */
@@ -66,7 +66,7 @@
     align-items: center;
     padding: 0 20px;
     height: 100px;
-    grid-column: 1 / -1; /* Span full width */
+   
   }
 
   /* Logo container styles */
@@ -155,8 +155,8 @@
     border: 1px solid var(--bg-gradient2);
     box-shadow: 0 4px 6px var(--secondary-color);
     padding: 20px;
-    margin: 20px;
-    width: 664px; /* Remove fixed width */
+    margin: 10px;
+    
     height: 370px; /* Allow height to adjust to content */
     grid-column: 1;
     grid-row: 2;
@@ -173,12 +173,12 @@
     border: 1px solid var(--bg-gradient2);
     box-shadow: 0 4px 6px var(--secondary-color);
     padding: 10px;
-    margin: 20px;
+    margin: 10px;
     width: 664px;
     height: 468px;
     grid-column: 2;
     grid-row: 2;
-    overflow: hidden;
+    /* overflow: hidden; */
   }
 
  
@@ -241,25 +241,14 @@
   /* Weather Details 2 */
   .weather-details-2 {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
-    /* background: var(--bg-gradient2); */
-    /* backdrop-filter: blur(10px); */
-    /* border-radius: 20px; */
-    /* border: 1px solid var(--bg-gradient2); */
-    /* box-shadow: 0 4px 6px var(--secondary-color); */
-    padding: 10px;
-    margin: 20px;
-    width: auto; /* Remove fixed width */
-    height: auto; /* Allow height to adjust to content */
-    min-height: 468px; /* Minimum height */
+    padding: 5px;
+    margin: 10px;
+    /* width: 664px; */
+    /* height: 468px; */
     grid-column: 1;
     grid-row: 3;
-    background: var(--bg-gradient2); /* Add background */
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid var(--bg-gradient2);
-    box-shadow: 0 4px 6px var(--secondary-color);
   }
 
   .weather-details-2 .weather-details-item {
@@ -270,8 +259,8 @@
     box-shadow: 0 2px 4px var(--secondary-color);
     padding: 20px; /* Changed from 15px to 20px for consistency */
     margin: 10px;
-    width: 259px; /* Kept the specific width */
-    height: 201px; /* Kept the specific height */
+    width: 320px;
+    height: 216px;
     text-align: center;
     transition: transform 0.3s ease;
     width: calc(50% - 20px); /* Two items per row with gap */
@@ -319,8 +308,8 @@
     box-shadow: 0 4px 6px var(--secondary-color);
     padding: 10px;
     margin: 20px;
-    /* width: 664px; */
-    /* height: 468px; */
+    width: 664px;
+    height: 468px;
   }
 
   .weekly-report .weekly-report-item {
@@ -331,8 +320,7 @@
     box-shadow: 0 2px 4px var(--secondary-color);
     padding: 20px;
     margin: 10px;
-    width: 259px;
-    height: 201px;
+    
     text-align: center;
     transition: transform 0.3s ease;
   }
