@@ -38,7 +38,8 @@
     padding: 0;
   }
 
-  htm {
+  html {
+    /* max-width: 1440px; */
     font-family: var(--font-regular);
     font-size: var(--regular-font);
     scroll-behavior: smooth;
@@ -60,11 +61,13 @@
 /* Header */
 
   .header {
+    max-width: 1440px;
     display: flex; /* Use flexbox for layout */
     justify-content: space-between; /* Distribute items evenly along the main axis */
     align-items: center; /* Center items vertically */
     padding: 10px; /* Add padding around the header */
     height: 100px; /* Set a fixed height for the header */
+    margin-inline: auto;
   }
 
   .logo {
@@ -133,6 +136,25 @@
 
 /* Main */
 
+/* Container */
+
+  .container {
+    max-width:  1440px;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+
+    margin-inline: auto;
+    padding-block: 20px;
+  }
+
+/* Container End */
+
 /* Weather Info */
 
   .weatherinfo {
@@ -143,9 +165,9 @@
     padding: 20px; /* Add padding inside the element */
     display: flex; /* Use flexbox for layout */
     gap: 20px; /* Add space between flex items */
-    justify-content: space-between; /* Distribute space between flex items */
-    /* height: 370px; /* Commented out fixed height */
-    /* width: 664px; /* Commented out fixed width */
+    /* justify-content: space-between; Distribute space between flex items */
+    height: 370px; /* Commented out fixed height */
+    width: 664px; /* Commented out fixed width */
   }
 
   .material-symbols-outlined {
@@ -195,8 +217,9 @@
     border: 3px solid var(--bg-gradient2); /* Add border with custom color */
     padding: 20px; /* Add padding inside the element */
     gap: 10px; /* Add space between flex items */
-    /* width: 664px; /* Commented out fixed width */
-    /* height: 468px; /* Commented out fixed height */
+     width: 664px; /* Commented out fixed width */
+     height: 468px; /* Commented out fixed height */
+     justify-content: center;
   }
 
   .weather-details-item {
@@ -212,6 +235,8 @@
     padding: 20px; /* Add padding inside the element */
     text-align: right; /* Align text to the right */
   }
+
+ 
 
   .weather-details span {
     font-size: 24px; /* Set font size for spans */
@@ -275,6 +300,8 @@
     border: 3px solid var(--bg-gradient2); /* Add border with custom color */
     padding: 20px; /* Add padding inside the element */
     gap: 10px; /* Add space between flex items */
+    width: 664px; /* Commented out fixed width */
+    height: 349px; /* Commented out fixed height */
   }
 
   .daily-report {
@@ -328,9 +355,12 @@
     display: flex; /* Use flexbox for layout */
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     padding: 20px; /* Add padding inside the element */
-    gap: 10px; /* Add space between flex items */
-    /* width: 664px; /* Commented out fixed width */
-    /* height: 468px; /* Commented out fixed height */
+    gap: 40px; /* Add space between flex items */
+    width: 664px; /* Commented out fixed width */
+     height: 468px; /* Commented out fixed height */
+     justify-content: center;
+     
+
   }
 
   .other-countries-item {
@@ -339,9 +369,9 @@
     background-color: var(--bg-gradient2); /* Set background color */
     border-radius: 25px; /* Add rounded corners */
     border: 3px solid var(--bg-gradient2); /* Add border with custom color */
-    gap: 2px; /* Add space between flex items */
-    height: 216px; /* Set fixed height */
-    width: 320px; /* Set fixed width */
+    gap: 1px; /* Add space between flex items */
+    height: 210px; /* Set fixed height */
+    width: 259px; /* Set fixed width */
     text-align: center; /* Align text to the right */
   }
 
@@ -367,7 +397,7 @@
     font-size: var(--xs-font); /* Set font size */
     color: var(--main-color); /* Set text color */
     justify-content: center; /* Center content horizontally */
-    gap: 30px; /* Add space between flex items */
+    gap: 10px; /* Add space between flex items */
   }
 
 /* other countries End */
@@ -406,5 +436,8 @@
 
 
 /* Responsive */
+
+
+
 
 /* Responsive End */
