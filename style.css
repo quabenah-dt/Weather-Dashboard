@@ -260,10 +260,67 @@
     width: 100%; /* Set full width */
     text-align: right; /* Align text to the right */
   }
-
-
   
 /* Weather Details End */
 
+/* Daily Report */
+
+  .daily-report {
+    display: flex; /* Use flexbox for layout */
+    /* flex-wrap: wrap; Allow items to wrap to the next line */
+    background-color: var(--bg-gradient1); /* Set background color */
+    backdrop-filter: blur(10px); /* Apply blur effect to background */
+    border-radius: 20px; /* Add rounded corners */
+    border: 3px solid var(--bg-gradient2); /* Add border with custom color */
+    padding: 20px; /* Add padding inside the element */
+    gap: 10px; /* Add space between flex items */
+  }
+
+  .daily-report {
+    overflow-x: auto; /* Enable horizontal scrolling for the container */
+    scroll-behavior: smooth; /* Add smooth scrolling effect */
+    -webkit-overflow-scrolling: touch; /* Improve touch scrolling on iOS */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  }
+
+  .daily-report::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+  }
+
+  .daily-report-item {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack child elements vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    background-color: var(--bg-gradient2); /* Set background color */
+    border-radius: 25px; /* Add rounded corners */
+    border: 1px solid var(--bg-gradient2); /* Add border with custom color */
+    gap: 30px; /* Add space between flex items */
+    height: 280px; /* Set fixed height */
+    min-width: 115px; /* Set fixed width */
+    flex-shrink: 0; /* Prevent items from shrinking */
+    scroll-snap-align: start; /* Align items to the start of the container when scrolling */
+  }
+
+
+  .daily-report-item p {
+    font-family: var(--font-regular); /* Set font family */
+    font-size: var(--xs-font); /* Set font size */
+    color: var(--main-color); /* Set text color */
+    text-align: center; /* Center text */
+  }
+
+  .daily-report-item img {
+    width: 50%; /* Set image width to full width */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: auto; /* Center the image horizontally */
+    margin-right: auto; /* Center the image horizontally */
+  }
+
+ 
+/* Daily Report End */
+
+
+
 /* Main End */
-  
