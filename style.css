@@ -17,6 +17,7 @@
     --regular-font: 20px;
     --large-font: 32px; 
     --number: 170px;
+    --temp: 96px;
     
   /* Fonts */
 
@@ -321,6 +322,55 @@
  
 /* Daily Report End */
 
+/* Other Countries */
+
+  .other-countries {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    padding: 20px; /* Add padding inside the element */
+    gap: 10px; /* Add space between flex items */
+    /* width: 664px; /* Commented out fixed width */
+    /* height: 468px; /* Commented out fixed height */
+  }
+
+  .other-countries-item {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack child elements vertically */
+    background-color: var(--bg-gradient2); /* Set background color */
+    border-radius: 25px; /* Add rounded corners */
+    border: 3px solid var(--bg-gradient2); /* Add border with custom color */
+    gap: 2px; /* Add space between flex items */
+    height: 216px; /* Set fixed height */
+    width: 320px; /* Set fixed width */
+    text-align: center; /* Align text to the right */
+  }
+
+  .other-countries-item img {
+    justify-content: center; /* Center content horizontally */
+    width: 59px; /* Set image width to full width */
+    height: 59px; /* Maintain aspect ratio */
+    margin-left: auto; /* Center the image horizontally */
+    margin-right: auto; /* Center the image horizontally */
+  }
+
+  .other-countries-item-temp {
+    font-family: var(--font-regular); /* Set font family */
+    font-size: var(--temp); /* Set font size */
+    color: var(--main-color); /* Set text color */
+    text-align: center; /* Center text */
+  }
+
+  .other-countries-item-info {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: row; /* Stack child elements vertically */
+    font-family: var(--font-regular); /* Set font family */
+    font-size: var(--xs-font); /* Set font size */
+    color: var(--main-color); /* Set text color */
+    justify-content: center; /* Center content horizontally */
+    gap: 30px; /* Add space between flex items */
+  }
+
+/* other countries */
 
 
 /* Main End */
