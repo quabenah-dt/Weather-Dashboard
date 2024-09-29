@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Lexend+Exa:wght@100..900&family=Lexend:wght@100..900&display=swap');
+
 :root{
   /* Colors */
 
@@ -17,12 +20,14 @@
     
   /* Fonts */
 
-  --font-light: 'Lexend Light';
-  --font-regular: 'Lexend Regular';
-  --font-medium: 'Lexend Medium';
-  --font-semibold: 'Lexend SemiBold';
-  --font-bold: 'Lexend Bold';
-  --font-extrabold: 'Lexend ExtraBold';
+  --font-light: 'Lexend', sans-serif;
+  --font-regular: 'Lexend', sans-serif;
+  --font-medium: 'Lexend', sans-serif;
+  --font-semibold: 'Lexend', sans-serif;
+  --font-bold: 'Lexend', sans-serif;
+  --font-extrabold: 'Lexend', sans-serif;
+  --font-black: 'Lexend', sans-serif;
+  --font-exa: 'Lexend Exa', sans-serif;
 
 }
 
@@ -44,7 +49,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
   }
 
 /* Header */
@@ -121,4 +126,65 @@
 /* Header End */
 
 
+/* Main */
+
+/* Weather Info */
+
+  .weatherinfo {
+    background-color: var(--bg-gradient1); /* Set background color */
+    backdrop-filter: blur(10px); /* Apply blur effect to background */
+    border-radius: 20px; /* Add rounded corners */
+    border: 3px solid var(--bg-gradient2); /* Add border with custom color */
+    padding: 20px; /* Add padding inside the element */
+    display: flex; /* Use flexbox for layout */
+    gap: 20px; /* Add space between flex items */
+    justify-content: space-between; /* Distribute space between flex items */
+    /* height: 370px; /* Commented out fixed height */
+    /* width: 664px; /* Commented out fixed width */
+  }
+
+  .material-symbols-outlined {
+    color: var(--secondary-color); /* Set icon color */
+    vertical-align: middle; /* Aligns the icon with the text */
+    display: inline-flex; /* Ensures proper alignment */
+    align-items: center; /* Centers the icon vertically */
+    margin-right: 5px; /* Adds a small space between the icon and text */
+  }
+
+  .location-text {
+    font-family: var(--font-regular); /* Set font family */
+    font-size: var(--regular-font); /* Set font size */
+    color: var(--secondary-color); /* Set text color */
+  }
+
+  .temp {
+    font-family: var(--font-exa); /* Set font family for temperature */
+    font-size: var(--number); /* Set font size for temperature */
+    color: var(--main-color); /* Set color for temperature */
+  }
+
+  .temp sup {
+    font-size: var(--number2); /* Set font size for superscript */
+  }
+
+  .temp2 {
+    margin-bottom: 20px; /* Add bottom margin */
+  }
+
+  .temp-range {
+    font-family: var(--font-regular); /* Set font family */
+    font-size: var(--regular-font); /* Set font size */
+    color: var(--secondary-color); /* Set text color */
+  }
+
+/* Weather Info End */
+
+
+/* Weather Details */
+
+
+
+/* Weather Details End */
+
+/* Main End */
   
