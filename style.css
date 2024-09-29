@@ -52,6 +52,10 @@
     /* overflow-y: hidden; */
   }
 
+  li {
+    list-style: none;
+  }
+
 /* Header */
 
   .header {
@@ -179,11 +183,86 @@
 
 /* Weather Info End */
 
-
 /* Weather Details */
 
+  .weather-details {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    background-color: var(--bg-gradient1); /* Set background color */
+    backdrop-filter: blur(10px); /* Apply blur effect to background */
+    border-radius: 20px; /* Add rounded corners */
+    border: 3px solid var(--bg-gradient2); /* Add border with custom color */
+    padding: 20px; /* Add padding inside the element */
+    gap: 10px; /* Add space between flex items */
+    /* width: 664px; /* Commented out fixed width */
+    /* height: 468px; /* Commented out fixed height */
+  }
+
+  .weather-details-item {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack child elements vertically */
+    justify-content: center; /* Center content vertically */
+    background-color: var(--bg-gradient2); /* Set background color */
+    border-radius: 25px; /* Add rounded corners */
+    border: 1px solid var(--bg-gradient2); /* Add border with custom color */
+    gap: 30px; /* Add space between flex items */
+    height: 201px; /* Set fixed height */
+    width: 259px; /* Set fixed width */
+    padding: 20px; /* Add padding inside the element */
+    text-align: right; /* Align text to the right */
+  }
+
+  .weather-details span {
+    font-size: 24px; /* Set font size for spans */
+    /* margin-: 30px; /* Commented out margin */
+    text-align: left; /* Align text to the left */
+  }
+
+  .material-symbols-outlined {
+    font-size: 24px; /* Set font size for icons */
+    color: var(--secondary-color); /* Set icon color */
+    margin-bottom: 10px; /* Add bottom margin */
+    text-align: left; /* Align text to the left */
+  }
+
+  .weather-details ul {
+    font-family: var(--font-regular); /* Set font family */
+    font-size: var(--regular-font); /* Set font size */
+    color: var(--main-color); /* Set text color */
+    margin-bottom: 10px; /* Add bottom margin */
+  }
+
+  .weather-details ul li {
+    margin-top: 20px; /* Add top margin to list items */
+    margin-bottom: 20px; /* Add bottom margin to list items */
+  }
+
+  .number {
+    font-size: var(--number2); /* Set font size for numbers */
+  }
+
+  .number span {
+    font-size: var(--xs-font); /* Set font size for spans within numbers */
+  }
+
+  .weather-details-item {
+    position: relative; /* Enable positioning for child elements */
+  }
+
+  .weather-details-item .material-symbols-outlined {
+    position: absolute; /* Position icon absolutely within parent */
+    top: 20px; /* Position from the top */
+    left: 20px; /* Position from the left */
+    text-align: left; /* Align text to the left */
+  }
+
+  .weather-details-item ul {
+    width: 100%; /* Set full width */
+    text-align: right; /* Align text to the right */
+  }
 
 
+  
 /* Weather Details End */
 
 /* Main End */
