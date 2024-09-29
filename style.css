@@ -370,7 +370,41 @@
     gap: 30px; /* Add space between flex items */
   }
 
-/* other countries */
+/* other countries End */
 
 
 /* Main End */
+
+/* Footer */
+
+  .footer {
+    text-align: center;
+    padding: 20px; /* Add padding inside the element */
+    /* background-color: var(--bg-gradient1) Set background color */
+    /* backdrop-filter: blur(10px) Apply blur effect to background */
+  }
+
+  .footer img {
+    width: 150px; /* Set image width */
+    height: 30px; /* Set image height */
+  }
+
+  .footer p {
+    font-family: var(--font-regular); /* Set font family */
+    font-size: var(--xs-font); /* Set font size */
+    color: var(--main-color); /* Set text color */
+    text-align: center; /* Center text */
+  }
+
+  .footer a {
+    text-decoration: none; /* Remove underline from links */
+    color: var(--main-color); /* Set link color */
+  }
+
+
+/* Footer End */
+
+
+/* Responsive */
+
+/* Responsive End */
