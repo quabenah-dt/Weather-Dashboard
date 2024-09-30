@@ -26,3 +26,6 @@ searchInput.addEventListener('blur', function() {
         searchIcon.style.display = 'block';
     }
 });
+
+
+

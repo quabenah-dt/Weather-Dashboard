@@ -168,6 +168,7 @@
     /* justify-content: space-between; Distribute space between flex items */
     height: 370px; /* Commented out fixed height */
     width: 664px; /* Commented out fixed width */
+    margin-bottom: 100px;
   }
 
   .material-symbols-outlined {
@@ -176,6 +177,12 @@
     display: inline-flex; /* Ensures proper alignment */
     align-items: center; /* Centers the icon vertically */
     margin-right: 5px; /* Adds a small space between the icon and text */
+  }
+
+  .weatherinfo img {
+    width: 100%; /* Set image width to full width */
+    height: 100%; /* Maintain aspect ratio */
+    /* margin-bottom: 100px; */
   }
 
   .location-text {
@@ -302,6 +309,7 @@
     gap: 10px; /* Add space between flex items */
     width: 664px; /* Commented out fixed width */
     height: 349px; /* Commented out fixed height */
+    margin-bottom: 100px;
   }
 
   .daily-report {
@@ -357,7 +365,7 @@
     padding: 20px; /* Add padding inside the element */
     gap: 40px; /* Add space between flex items */
     width: 664px; /* Commented out fixed width */
-     height: 468px; /* Commented out fixed height */
+     /* height: 468px; Commented out fixed height */
      justify-content: center;
      
 
