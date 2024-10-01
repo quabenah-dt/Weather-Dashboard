@@ -29,3 +29,19 @@ searchInput.addEventListener('blur', function() {
 
 
 
+// USER LOCATION
+
+const userLocation = document.getElementById('user-location')
+
+userLocation.addEventListener('change', function() {
+    if (userLocation.value.trim() !== '') {
+        updateWeatherInfo();
+        userLocation.value = '';
+        userLocation.blur();
+    }
+});
+
+function updateWeatherInfo(userLocation) {
+    const weatherData = getFetchData();
+}
+
