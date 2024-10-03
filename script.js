@@ -27,51 +27,32 @@ searchInput.addEventListener('blur', function() {
     }
 });
 
-// container
-const container = document.querySelector('.container');
-
 // API KEY
 const apiKey = '9d751db450eb388f855509b8ae7bccb8';
+const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=';
 
-// NOT FOUND
-const notFound = document.getElementById('not-found-container');
-
-// weather info
+// Select DOM elements
+// const searchButton = document.getElementById('search-button');
+const userInput = document.getElementById('user-location');
 const weatherInfo = document.querySelector('.weatherinfo');
-
-// daily report
+const notFound = document.querySelector('.not-found');
+const locationText = document.querySelector('.js-location-text');
+const dateText = document.querySelector('.js-date-text-2');
+const temperatureElement = document.querySelector('.js-temp');
+const weatherDescription = document.querySelector('.temp-range');
+const feelsLikeTemp = document.querySelector('.temp-range:last-child');
+const weatherIcon = document.querySelector('.weather-icon img');
 const dailyReport = document.querySelector('.daily-report');
+const weatherDetails = document.querySelector('.weather-details');
 
-// weather icon
-const weatherIcon = document.querySelector('.weather-icon img');    
-
-// temperature
-const temperature = document.querySelector('.temp');
-
-// humidity
-const humidity = document.querySelector('.humidity');
-
-// wind speed
-const windSpeed = document.querySelector('.wind-speed');
-
-// wind direction
-const windDirection = document.querySelector('.wind-direction');
-
-// pressure
-const pressure = document.querySelector('.pressure');
-
-// visibility
-const visibility = document.querySelector('.visibility');   
-
-// USER LOCATION
-const userLocation = document.getElementById('user-location');
-
-userLocation.addEventListener('change', async function() {
-    if (userLocation.value.trim() !== '') {
-        await updateWeatherInfo(userLocation.value);
-        userLocation.value = '';
-        userLocation.blur();
+// event listener for search button
+userInput.addEventListener('change', async function() {
+    if (userInput.value.trim() !== '') {
+        await updateWeather(userInput.value);
+        userInput.value = '';
+        userInput.blur();
     }
+    console.log(userInput.value);
 });
 
 async function getFetchData(endpoint, userLocation) {
@@ -87,25 +68,48 @@ async function getFetchData(endpoint, userLocation) {
     }
 }
 
-async function updateWeatherInfo(userLocation) {
-    const weatherData = await getFetchData('weather', userLocation);
-   
-    if (weatherData.cod !== 200) {
-        showDisplayError(notFound);
-        return;
+async function updateWeather(location) {
+    try {
+        const weatherData = await getFetchData('weather', location);
+        // Update the UI with the weather data
+        if (weatherData.cod === 200) {
+            // Show weather info and hide not found message
+            weatherInfo.style.display = 'block'
+            notFound.style.display = 'none';
+
+            // Update location & date
+            locationText.innerHTML = `<p class="location-text js-location-text"><span class="material-symbols-outlined">pin_drop</span>${weatherData.name}</p>`;
+            dateText.innerHTML = `<p class="location-text js-date-text"><span class="material-symbols-outlined">calendar_month</span>${new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>`;
+            
+            // Update temperature
+            temperatureElement.innerHTML = `${Math.round(weatherData.main.temp)}&deg;C`;
+
+            // Update weather description
+            weatherDescription.textContent = weatherData.weather[0].description;
+
+            // Update feels like temperature
+            feelsLikeTemp.textContent = `Feels like ${Math.round(weatherData.main.feels_like)}°C`;
+
+            // // Update weather icon
+            // const iconCode = weatherData.weather[0].icon;
+            // weatherIcon.src = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
+            // weatherIcon.alt = weatherData.weather[0].description;
+
+            // // Update weather details
+            // // You might need to adjust these selectors based on your HTML structure
+            // document.querySelector('.humidity').textContent = `${weatherData.main.humidity}%`;
+            // document.querySelector('.wind').textContent = `${weatherData.wind.speed} m/s`;
+            // document.querySelector('.pressure').textContent = `${weatherData.main.pressure} hPa`;
+
+            // Note: Daily report update would require additional API call to get forecast data
+        } else {
+            // Show not found message and hide weather info
+            weatherInfo.style.display = 'none';
+            notFound.style.display = 'flex';
+        }
+        console.log(weatherData);
+    } catch (error) {
+        console.error('Error updating weather info:', error);
+        // Handle the error (e.g., show an error message to the user)
     }
-
-    showWeatherInfo(weatherData);
-} 
-
-function showDisplayError(notFound) {
-    notFound.style.display = 'block';
-    container.style.display = 'none';
 }
-
-function showWeatherInfo(weatherData) {
-    notFound.style.display = 'none';
-    container.style.display = 'block';
-}
-
-

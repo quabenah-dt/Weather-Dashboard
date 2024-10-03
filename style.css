@@ -414,13 +414,6 @@
 /* Main End */
 
 /* Not Found */
- 
-  .not-found-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
 
   .not-found {
     display: flex;
