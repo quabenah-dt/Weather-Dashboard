@@ -41,7 +41,7 @@ const dateText = document.querySelector('.js-date-text-2');
 const temperatureElement = document.querySelector('.js-temp');
 const weatherDescription = document.querySelector('.temp-range');
 const feelsLikeTemp = document.querySelector('.temp-range:last-child');
-const weatherIcon = document.querySelector('.weather-icon img');
+const weatherIcon = document.querySelector('.weatherinfo-icon');
 const dailyReport = document.querySelector('.daily-report');
 const weatherDetails = document.querySelector('.weather-details');
 
@@ -82,7 +82,32 @@ async function updateWeather(location) {
             dateText.innerHTML = `<p class="location-text js-date-text"><span class="material-symbols-outlined">calendar_month</span>${new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>`;
             
             // Update temperature
-            temperatureElement.innerHTML = `${Math.round(weatherData.main.temp)}&deg;C`;
+            temperatureElement.innerHTML = `<p class="temp js-temp">${Math.round(weatherData.main.temp)}&deg;</p>`;
+
+            // update weather icon
+            const iconCode = weatherData.weather[0].icon;
+            const iconMap = {
+                '01d': 'img1.png', // clear sky day
+                '01n': 'img2.png', // clear sky night
+                '02d': 'img3.png', // few clouds day
+                '02n': 'img4.png', // few clouds night
+                '03d': 'img5.png', // scattered clouds
+                '03n': 'img5.png', // scattered clouds
+                '04d': 'img5.png', // broken clouds
+                '04n': 'img5.png', // broken clouds
+                '09d': 'img6.png', // shower rain
+                '09n': 'img6.png', // shower rain
+                '10d': 'img7.png', // rain day
+                '10n': 'img8.png', // rain night
+                '11d': 'img9.png', // thunderstorm
+                '11n': 'img9.png', // thunderstorm
+                '13d': 'img10.png', // snow
+                '13n': 'img10.png', // snow
+                '50d': 'img11.png', // mist
+                '50n': 'img11.png', // mist
+            };
+            // const iconFileName = iconMap[iconCode] || 'img1.png'; // default to clear sky if icon not found
+            weatherIcon.src = `./Assets/images/weather immages/${iconMap[iconCode]}`;
 
             // Update weather description
             weatherDescription.textContent = weatherData.weather[0].description;

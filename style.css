@@ -179,10 +179,11 @@
     margin-right: 5px; /* Adds a small space between the icon and text */
   }
 
-  .weatherinfo img {
+  .weather-icon-img {
     width: 100%; /* Set image width to full width */
     height: 100%; /* Maintain aspect ratio */
-    /* margin-bottom: 100px; */
+    margin-top: 20px;   
+    margin-bottom: 20px;
   }
 
   .location-text {
@@ -204,6 +205,8 @@
   .temp2 {
     margin-bottom: 20px; /* Add bottom margin */
   }
+
+
 
   .temp-range {
     font-family: var(--font-regular); /* Set font family */
@@ -348,8 +351,8 @@
   }
 
   .daily-report-item img {
-    width: 50%; /* Set image width to full width */
-    height: auto; /* Maintain aspect ratio */
+    height: 100px; /* Set image width to full width */
+    width: 100px; /* Maintain aspect ratio */
     margin-left: auto; /* Center the image horizontally */
     margin-right: auto; /* Center the image horizontally */
   }
