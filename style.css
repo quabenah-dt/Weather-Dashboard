@@ -182,8 +182,6 @@
   .weather-icon-img {
     width: 100%; /* Set image width to full width */
     height: 100%; /* Maintain aspect ratio */
-    margin-top: 20px;   
-    margin-bottom: 20px;
   }
 
   .location-text {
