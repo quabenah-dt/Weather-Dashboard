@@ -208,3 +208,90 @@ navigator.geolocation.getCurrentPosition(success, error);
 function error() {
     console.log('Error getting location');
 }
+
+
+
+// Define an array of countries, temperatures, and icons
+const countries = [
+    { name: 'UAE', temperature: '16°', icon: './Assets/images/weather images/clouds.png' },
+    { name: 'USA', temperature: '22°', icon: './Assets/images/weather images/clear.png' },
+    { name: 'Canada', temperature: '10°', icon: './Assets/images/weather images/rain.png' },
+    { name: 'Australia', temperature: '25°', icon: './Assets/images/weather images/clear.png' },
+    { name: 'Germany', temperature: '18°', icon: './Assets/images/weather images/cloudy.png' },
+    { name: 'Japan', temperature: '20°', icon: './Assets/images/weather images/cloudy.png' },
+    { name: 'Brazil', temperature: '28°', icon: './Assets/images/weather images/clear.png' },
+    { name: 'South Africa', temperature: '23°', icon: './Assets/images/weather images/clear.png' },
+];
+
+const weatherIcons = [
+    './Assets/images/weather images/clouds.png',
+    './Assets/images/weather images/clear.png',
+    './Assets/images/weather images/rain.png',
+    './Assets/images/weather images/cloudy.png',
+    './Assets/images/weather images/thunder.png',
+    './Assets/images/weather images/snow.png',
+    './Assets/images/weather images/mist.png'
+];
+
+// Get the other countries items
+const otherCountriesItems = document.querySelectorAll('.other-countries-item');
+
+// Function to get a random temperature between -10 and 40
+function getRandomTemperature() {
+    return Math.floor(Math.random() * 51 - 10) + '°';
+}
+
+// Function to get a random weather icon
+function getRandomWeatherIcon() {
+    return weatherIcons[Math.floor(Math.random() * weatherIcons.length)];
+}
+
+// Function to update the other countries items
+function updateOtherCountries() {
+    countries.forEach((country, index) => {
+        if (otherCountriesItems[index]) {
+            country.temperature = getRandomTemperature();
+            country.icon = getRandomWeatherIcon();
+            otherCountriesItems[index].querySelector('img').src = country.icon;
+            otherCountriesItems[index].querySelector('.other-countries-item-temp').textContent = country.temperature;
+            otherCountriesItems[index].querySelector('.other-countries-item-info p:first-child').textContent = country.name;
+        }
+    });
+}
+
+// Update the other countries items every 10 seconds
+setInterval(() => {
+    // Shuffle the countries array
+    for (let i = countries.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [countries[i], countries[j]] = [countries[j], countries[i]];
+    }
+    updateOtherCountries();
+}, 10000);
+
+// Initial update
+updateOtherCountries();
+
+
+
+// get the daily report items
+const dailyReportItems = document.querySelectorAll('.daily-report-item');
+
+// function to get a random weather icon
+function getRandomWeatherIcon() {
+    return weatherIcons[Math.floor(Math.random() * weatherIcons.length)];
+}
+
+// function to update the daily report items    
+function updateDailyReport() {
+    dailyReportItems.forEach((item, index) => {
+        item.querySelector('img').src = getRandomWeatherIcon();
+        item.querySelector('p:first-child').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+        item.querySelector('p:last-child').textContent = `${Math.floor(Math.random() * 30)}°`;
+    });
+}
+
+
+   
+
+    
