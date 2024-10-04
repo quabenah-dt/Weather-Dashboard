@@ -218,14 +218,14 @@ function error() {
 
 // Define an array of countries, temperatures, and icons
 const countries = [
-    { name: 'UAE', temperature: '16°', icon: './Assets/images/weather images/clouds.png' },
-    { name: 'USA', temperature: '22°', icon: './Assets/images/weather images/clear.png' },
-    { name: 'Canada', temperature: '10°', icon: './Assets/images/weather images/rain.png' },
-    { name: 'Australia', temperature: '25°', icon: './Assets/images/weather images/clear.png' },
-    { name: 'Germany', temperature: '18°', icon: './Assets/images/weather images/cloudy.png' },
-    { name: 'Japan', temperature: '20°', icon: './Assets/images/weather images/cloudy.png' },
-    { name: 'Brazil', temperature: '28°', icon: './Assets/images/weather images/clear.png' },
-    { name: 'South Africa', temperature: '23°', icon: './Assets/images/weather images/clear.png' },
+    { name: 'UAE', city: 'Dubai' },
+    { name: 'USA', city: 'New York' },
+    { name: 'Canada', city: 'Toronto' },
+    { name: 'Australia', city: 'Sydney' },
+    { name: 'Germany', city: 'Berlin' },
+    { name: 'Japan', city: 'Tokyo' },
+    { name: 'Brazil', city: 'Rio de Janeiro' },
+    { name: 'South Africa', city: 'Cape Town' },
 ];
 
 const weatherIcons = [
@@ -241,38 +241,69 @@ const weatherIcons = [
 // Get the other countries items
 const otherCountriesItems = document.querySelectorAll('.other-countries-item');
 
-// Function to get a random temperature between -10 and 40
-function getRandomTemperature() {
-    return Math.floor(Math.random() * 51 - 10) + '°';
+// Function to fetch weather data for a single city
+async function fetchWeatherData(city) {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const response = await fetch(url);
+    const data = await response.json();
+    return {
+        temperature: Math.round(data.main.temp),
+        icon: getWeatherIcon(data.weather[0].icon),
+        high: Math.round(data.main.temp_max),
+        low: Math.round(data.main.temp_min)
+    };
 }
 
-// Function to get a random weather icon
-function getRandomWeatherIcon() {
-    return weatherIcons[Math.floor(Math.random() * weatherIcons.length)];
+// Function to fetch weather data for all countries
+async function fetchAllWeatherData() {
+    const promises = countries.map(country => fetchWeatherData(country.city));
+    return Promise.all(promises);
 }
 
-// Function to update the other countries items
-function updateOtherCountries() {
-    countries.forEach((country, index) => {
-        if (otherCountriesItems[index]) {
-            country.temperature = getRandomTemperature();
-            country.icon = getRandomWeatherIcon();
-            otherCountriesItems[index].querySelector('img').src = country.icon;
-            otherCountriesItems[index].querySelector('.other-countries-item-temp').textContent = country.temperature;
-            otherCountriesItems[index].querySelector('.other-countries-item-info p:first-child').textContent = country.name;
-        }
-    });
-}
-
-// Update the other countries items every 10 seconds
-setInterval(() => {
-    // Shuffle the countries array
-    for (let i = countries.length - 1; i > 0; i--) {
+// Function to shuffle an array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [countries[i], countries[j]] = [countries[j], countries[i]];
+        [array[i], array[j]] = [array[j], array[i]];
     }
-    updateOtherCountries();
-}, 10000);
+    return array;
+}
+
+// Modified function to update the other countries items
+async function updateOtherCountries() {
+    try {
+        // Shuffle the countries array
+        const shuffledCountries = shuffleArray([...countries]);
+        const weatherData = await Promise.all(shuffledCountries.slice(0, 8).map(country => fetchWeatherData(country.city)));
+        
+        shuffledCountries.slice(0, 8).forEach((country, index) => {
+            if (otherCountriesItems[index]) {
+                const imgElement = otherCountriesItems[index].querySelector('img');
+                const tempElement = otherCountriesItems[index].querySelector('.other-countries-item-temp');
+                const nameElement = otherCountriesItems[index].querySelector('.other-countries-item-info p:first-child');
+                const highLowElement = otherCountriesItems[index].querySelector('.other-countries-item-info p:last-child');
+
+                const { temperature, icon, high, low } = weatherData[index];
+
+                // Use the Image constructor to preload the image
+                const img = new Image();
+                img.onload = function() {
+                    imgElement.src = this.src;
+                };
+                img.src = `./Assets/images/weather images/${icon}.png`;
+
+                tempElement.textContent = `${temperature}°`;
+                nameElement.textContent = country.name;
+                highLowElement.textContent = `H:${high}° L:${low}°`;
+            }
+        });
+    } catch (error) {
+        console.error('Error updating weather data:', error);
+    }
+}
+
+// Update the other countries items every 30 seconds
+setInterval(updateOtherCountries, 30000);
 
 // Initial update
 updateOtherCountries();
