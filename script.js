@@ -55,11 +55,11 @@ userInput.addEventListener('change', async function() {
     console.log(userInput.value);
 });
 
-async function updateWeather(city) {
-    const response = await fetch(`${apiUrl}${city}&appid=${apiKey}`);
-    const data = await response.json();
-    console.log(data);
-}
+// async function updateWeather(city) {
+//     const response = await fetch(`${apiUrl}${city}&appid=${apiKey}`);
+//     const data = await response.json();
+//     // console.log(data);
+// }
 
 async function updateWeather(city) {
     try {
@@ -129,20 +129,32 @@ function updateWeatherDetails(data) {
     
     // Update Wind Status
     detailsItems[0].querySelector('.number').innerHTML = `${data.wind.speed.toFixed(2)}<span>m/s</span>`;
+    detailsItems[0].querySelector('li:last-child').textContent = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
     
     // Update Humidity
     detailsItems[1].querySelector('.number').innerHTML = `${data.main.humidity}<span>%</span>`;
+    detailsItems[1].querySelector('li:last-child').textContent = getHumidityDescription(data.main.humidity);
     
     // Update Visibility
     detailsItems[2].querySelector('.number').innerHTML = `${(data.visibility / 1000).toFixed(1)}<span>km</span>`;
+    detailsItems[2].querySelector('li:last-child').textContent = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
     
-    // Update Pressure (replacing UV Index as it's not available in the current API response)
+    // Update Pressure
     detailsItems[3].querySelector('li:first-child').textContent = 'Pressure';
     detailsItems[3].querySelector('.number').innerHTML = `${data.main.pressure}<span>hPa</span>`;
-    
-    // Update time for all items
-    const currentTime = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
-    detailsItems.forEach(item => {
-        item.querySelector('li:last-child').textContent = currentTime;
-    });
+    detailsItems[3].querySelector('li:last-child').textContent = getPressureDescription(data.main.pressure);
 }
+
+function getHumidityDescription(humidity) {
+    if (humidity < 30) return 'Low humidity';
+    if (humidity < 60) return 'Comfortable humidity';
+    return 'High humidity';
+}
+
+function getPressureDescription(pressure) {
+    if (pressure < 1000) return 'Low pressure';
+    if (pressure > 1020) return 'High pressure';
+    return 'Normal pressure';
+}
+
+
