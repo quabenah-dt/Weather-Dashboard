@@ -37,10 +37,34 @@ navigator.geolocation.getCurrentPosition(success, error, {
 });
 
 // Success callback for geolocation
-function success(position) {
+async function success(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     console.log("Latitude:", latitude, "Longitude:", longitude);
+    
+    // Reverse geocode to get the actual location name
+    try {
+        const response = await fetch(`https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`);
+        const data = await response.json();
+        
+        // Log the entire response to inspect it
+        console.log('API Response:', data);
+
+        if (data && data.length > 0) {
+            const locationInfo = data[0];
+            const detailedLocation = [
+                locationInfo.name,
+                locationInfo.state,
+                locationInfo.country
+            ].filter(Boolean).join(", ");
+            console.log("Detailed location:", detailedLocation);
+            // Update the location display with more detailed information
+            locationText.textContent = detailedLocation;
+        }
+    } catch (error) {
+        console.error('Error reverse geocoding:', error);
+    }
+
     // Fetch weather data using coordinates
     getWeatherByCoords(latitude, longitude);
 }
