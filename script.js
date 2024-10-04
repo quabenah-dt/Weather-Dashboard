@@ -67,6 +67,8 @@ const feelsLikeTemp = document.querySelector('.temp-range:last-child');
 const weatherIcon = document.querySelector('.weatherinfo-icon');
 const dailyReport = document.querySelector('.daily-report');
 const weatherDetails = document.querySelector('.weather-details');
+const container = document.querySelector('.container');
+
 
 // Function to get weather data based on coordinates
 async function getWeatherByCoords(latitude, longitude) {
@@ -103,11 +105,14 @@ async function updateWeather(city) {
         const data = await response.json();
         console.log(data);
 
-        if (data.cod === '404') {
+        if (data.cod == 404) {  // Use loose equality (==) instead of strict equality (===)
             // Handle city not found
-            weatherInfo.style.display = 'none';
+            container.style.display = 'none';
             notFound.style.display = 'block';
             return;
+        } else if (data.cod == 200) {  // Use loose equality (==) instead of strict equality (===)
+            container.style.display = '';
+            notFound.style.display = 'none';
         }
 
         updateWeatherDisplay(data);
@@ -118,8 +123,8 @@ async function updateWeather(city) {
 
 function updateWeatherDisplay(data) {
     // Update weather information
-    weatherInfo.style.display = 'flex';
-    notFound.style.display = 'none';
+    // container.style.display = 'flex';
+    // notFound.style.display = 'none';
 
     locationText.innerHTML = `<span class="material-symbols-outlined">pin_drop</span>${data.name}, ${data.sys.country}`;
     
