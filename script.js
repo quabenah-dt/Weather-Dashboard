@@ -346,5 +346,13 @@ function updateDailyReport() {
     });
 }
 
-// Note: The updateDailyReport function is not called in this code snippet.
-// Consider implementing a proper forecast API call to populate this section with real data.
+//      Handling Errors
+
+// Function to handle errors
+function handleError(error) {
+    console.error('Error:', error);
+    // Optionally, you can display an error message to the user
+    alert('An error occurred while fetching weather data. Please try again later.');
+}
+
+
