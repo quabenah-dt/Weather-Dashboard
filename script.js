@@ -27,12 +27,35 @@
 //     }
 // });
 
+// get my location
+navigator.geolocation.getCurrentPosition(success, error, {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+});
+
+function success(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    console.log("Latitude:", latitude, "Longitude:", longitude);
+    // Call the function to get weather data using these coordinates
+    getWeatherByCoords(latitude, longitude);
+}
+
+function error(err) {
+    console.error('Error getting location:', err.message);
+    // Fallback to a default location or prompt user to enter location manually
+    alert("Unable to retrieve your location. Please enter your location manually.");
+}   
+
+
+
+
 // API KEY
 const apiKey = '9d751db450eb388f855509b8ae7bccb8';
-const apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=';
+const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
 // Select DOM elements
-// const searchButton = document.getElementById('search-button');
 const userInput = document.getElementById('user-location');
 const weatherInfo = document.querySelector('.weatherinfo');
 const notFound = document.querySelector('.not-found');
@@ -45,6 +68,25 @@ const weatherIcon = document.querySelector('.weatherinfo-icon');
 const dailyReport = document.querySelector('.daily-report');
 const weatherDetails = document.querySelector('.weather-details');
 
+// Function to get weather data based on coordinates
+async function getWeatherByCoords(latitude, longitude) {
+    try {
+        const response = await fetch(`${apiUrl}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`);
+        const data = await response.json();
+        updateWeatherDisplay(data);
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+    }
+}
+
+// Modified success function to fetch weather data
+function success(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    console.log(latitude, longitude);
+    getWeatherByCoords(latitude, longitude);
+}
+
 // event listener for search button
 userInput.addEventListener('change', async function() {
     if (userInput.value.trim() !== '') {
@@ -55,15 +97,9 @@ userInput.addEventListener('change', async function() {
     console.log(userInput.value);
 });
 
-// async function updateWeather(city) {
-//     const response = await fetch(`${apiUrl}${city}&appid=${apiKey}`);
-//     const data = await response.json();
-//     // console.log(data);
-// }
-
 async function updateWeather(city) {
     try {
-        const response = await fetch(`${apiUrl}${city}&appid=${apiKey}&units=metric`);
+        const response = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=metric`);
         const data = await response.json();
         console.log(data);
 
@@ -74,30 +110,34 @@ async function updateWeather(city) {
             return;
         }
 
-        // Update weather information
-        weatherInfo.style.display = 'flex';
-        notFound.style.display = 'none';
-
-        locationText.innerHTML = `<span class="material-symbols-outlined">pin_drop</span>${data.name}, ${data.sys.country}`;
-        
-        const currentDate = new Date();
-        const options = { weekday: 'long', day: 'numeric', month: 'short' };
-        dateText.innerHTML = `<span class="material-symbols-outlined">calendar_month</span>${currentDate.toLocaleDateString('en-US', options)}`;
-
-        temperatureElement.textContent = `${Math.round(data.main.temp)}°`;
-        weatherDescription.textContent = data.weather[0].description;
-        feelsLikeTemp.textContent = `Feels like ${Math.round(data.main.feels_like)}°C`;
-
-        // Update weather icon
-        const iconCode = data.weather[0].icon;
-        const iconUrl = `./Assets/images/weather images/${getWeatherIcon(iconCode)}.png`;
-        weatherIcon.innerHTML = `<img src="${iconUrl}" alt="weather-icon" class="weather-icon-img">`;
-
-        // Update weather details
-        updateWeatherDetails(data);
+        updateWeatherDisplay(data);
     } catch (error) {
         console.error('Error fetching weather data:', error);
     }
+}
+
+function updateWeatherDisplay(data) {
+    // Update weather information
+    weatherInfo.style.display = 'flex';
+    notFound.style.display = 'none';
+
+    locationText.innerHTML = `<span class="material-symbols-outlined">pin_drop</span>${data.name}, ${data.sys.country}`;
+    
+    const currentDate = new Date();
+    const options = { weekday: 'long', day: 'numeric', month: 'short' };
+    dateText.innerHTML = `<span class="material-symbols-outlined">calendar_month</span>${currentDate.toLocaleDateString('en-US', options)}`;
+
+    temperatureElement.textContent = `${Math.round(data.main.temp)}°`;
+    weatherDescription.textContent = data.weather[0].description;
+    feelsLikeTemp.textContent = `Feels like ${Math.round(data.main.feels_like)}°C`;
+
+    // Update weather icon
+    const iconCode = data.weather[0].icon;
+    const iconUrl = `./Assets/images/weather images/${getWeatherIcon(iconCode)}.png`;
+    weatherIcon.innerHTML = `<img src="${iconUrl}" alt="weather-icon" class="weather-icon-img">`;
+
+    // Update weather details
+    updateWeatherDetails(data);
 }
 
 function getWeatherIcon(iconCode) {
@@ -143,6 +183,11 @@ function updateWeatherDetails(data) {
     detailsItems[3].querySelector('li:first-child').textContent = 'Pressure';
     detailsItems[3].querySelector('.number').innerHTML = `${data.main.pressure}<span>hPa</span>`;
     detailsItems[3].querySelector('li:last-child').textContent = getPressureDescription(data.main.pressure);
+
+    // Force a reflow to ensure the DOM updates
+    weatherDetails.style.display = 'none';
+    weatherDetails.offsetHeight; // Trigger reflow
+    weatherDetails.style.display = '';
 }
 
 function getHumidityDescription(humidity) {
@@ -157,4 +202,9 @@ function getPressureDescription(pressure) {
     return 'Normal pressure';
 }
 
+// Automatically get user's location and update weather on page load
+navigator.geolocation.getCurrentPosition(success, error);
 
+function error() {
+    console.log('Error getting location');
+}
