@@ -1,61 +1,62 @@
-// // Get the search input and search icon elements
-// const searchInput = document.querySelector('.search input');
-// const searchIcon = document.querySelector('.search .material-symbols-outlined');
+// Select DOM elements for search functionality
+const searchInput = document.querySelector('.search input');
+const searchIcon = document.querySelector('.search .material-symbols-outlined');
 
-// // Add event listener for input changes
-// searchInput.addEventListener('input', function() {
-//     // If there's text in the input, hide the search icon
-//     if (this.value.length > 0) {
-//         searchIcon.style.display = 'none';
-//     } else {
-//         // If the input is empty, show the search icon
-//         searchIcon.style.display = 'block';
-//     }
-// });
+// Event listener for input changes
+searchInput.addEventListener('input', function() {
+    // Hide search icon when there's text in the input
+    if (this.value.length > 0) {
+        searchIcon.style.display = 'none';
+    } else {
+        // Show search icon when input is empty
+        searchIcon.style.display = 'block';
+    }
+});
 
-// // Add event listener for focus
-// searchInput.addEventListener('focus', function() {
-//     // Hide the search icon when the input is focused
-//     searchIcon.style.display = 'none';
-// });
+// Event listener for input focus
+searchInput.addEventListener('focus', function() {
+    // Hide search icon when input is focused
+    searchIcon.style.display = 'none';
+});
 
-// // Add event listener for blur (losing focus)
-// searchInput.addEventListener('blur', function() {
-//     // If the input is empty when losing focus, show the search icon
-//     if (this.value.length === 0) {
-//         searchIcon.style.display = 'block';
-//     }
-// });
+// Event listener for input blur (losing focus)
+searchInput.addEventListener('blur', function() {
+    // Show search icon if input is empty when losing focus
+    if (this.value.length === 0) {
+        searchIcon.style.display = 'block';
+    }
+});
 
-// get my location
+//  WEARHER INFORMATION
+
+// Get user's geolocation
 navigator.geolocation.getCurrentPosition(success, error, {
     enableHighAccuracy: true,
     timeout: 5000,
     maximumAge: 0
 });
 
+// Success callback for geolocation
 function success(position) {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     console.log("Latitude:", latitude, "Longitude:", longitude);
-    // Call the function to get weather data using these coordinates
+    // Fetch weather data using coordinates
     getWeatherByCoords(latitude, longitude);
 }
 
+// Error callback for geolocation
 function error(err) {
     console.error('Error getting location:', err.message);
-    // Fallback to a default location or prompt user to enter location manually
+    // Alert user to enter location manually if geolocation fails
     alert("Unable to retrieve your location. Please enter your location manually.");
 }   
 
-
-
-
-// API KEY
+// API configuration
 const apiKey = '9d751db450eb388f855509b8ae7bccb8';
 const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
-// Select DOM elements
+// Select DOM elements for weather display
 const userInput = document.getElementById('user-location');
 const weatherInfo = document.querySelector('.weatherinfo');
 const notFound = document.querySelector('.not-found');
@@ -69,8 +70,7 @@ const dailyReport = document.querySelector('.daily-report');
 const weatherDetails = document.querySelector('.weather-details');
 const container = document.querySelector('.container');
 
-
-// Function to get weather data based on coordinates
+// Function to fetch weather data using coordinates
 async function getWeatherByCoords(latitude, longitude) {
     try {
         const response = await fetch(`${apiUrl}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`);
@@ -81,15 +81,7 @@ async function getWeatherByCoords(latitude, longitude) {
     }
 }
 
-// Modified success function to fetch weather data
-function success(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    console.log(latitude, longitude);
-    getWeatherByCoords(latitude, longitude);
-}
-
-// event listener for search button
+// Event listener for search input
 userInput.addEventListener('change', async function() {
     if (userInput.value.trim() !== '') {
         await updateWeather(userInput.value);
@@ -99,18 +91,20 @@ userInput.addEventListener('change', async function() {
     console.log(userInput.value);
 });
 
+// Function to update weather based on city input
 async function updateWeather(city) {
     try {
         const response = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=metric`);
         const data = await response.json();
         console.log(data);
 
-        if (data.cod == 404) {  // Use loose equality (==) instead of strict equality (===)
-            // Handle city not found
+        if (data.cod == 404) {
+            // Hide main container and show 'not found' message
             container.style.display = 'none';
             notFound.style.display = 'block';
             return;
-        } else if (data.cod == 200) {  // Use loose equality (==) instead of strict equality (===)
+        } else if (data.cod == 200) {
+            // Show main container and hide 'not found' message
             container.style.display = '';
             notFound.style.display = 'none';
         }
@@ -121,17 +115,17 @@ async function updateWeather(city) {
     }
 }
 
+// Function to update the weather display with fetched data
 function updateWeatherDisplay(data) {
-    // Update weather information
-    // container.style.display = 'flex';
-    // notFound.style.display = 'none';
-
+    // Update location
     locationText.innerHTML = `<span class="material-symbols-outlined">pin_drop</span>${data.name}, ${data.sys.country}`;
     
+    // Update date
     const currentDate = new Date();
     const options = { weekday: 'long', day: 'numeric', month: 'short' };
     dateText.innerHTML = `<span class="material-symbols-outlined">calendar_month</span>${currentDate.toLocaleDateString('en-US', options)}`;
 
+    // Update temperature and description
     temperatureElement.textContent = `${Math.round(data.main.temp)}°`;
     weatherDescription.textContent = data.weather[0].description;
     feelsLikeTemp.textContent = `Feels like ${Math.round(data.main.feels_like)}°C`;
@@ -141,40 +135,33 @@ function updateWeatherDisplay(data) {
     const iconUrl = `./Assets/images/weather images/${getWeatherIcon(iconCode)}.png`;
     weatherIcon.innerHTML = `<img src="${iconUrl}" alt="weather-icon" class="weather-icon-img">`;
 
-    // Update weather details
+    // Update detailed weather information
     updateWeatherDetails(data);
 }
 
+// Function to map API icon codes to local image files
 function getWeatherIcon(iconCode) {
     const iconMap = {
-        '01d': 'clear',
-        '01n': 'clear',
-        '02d': 'clouds',
-        '02n': 'clouds',
-        '03d': 'clouds',
-        '03n': 'clouds',
-        '04d': 'clouds',
-        '04n': 'clouds',
-        '09d': 'rain',
-        '09n': 'rain',
-        '10d': 'rain',
-        '10n': 'rain',
-        '11d': 'thunder',
-        '11n': 'thunder',
-        '13d': 'snow',
-        '13n': 'snow',
-        '50d': 'mist',
-        '50n': 'mist'
+        '01d': 'clear', '01n': 'clear',
+        '02d': 'clouds', '02n': 'clouds',
+        '03d': 'clouds', '03n': 'clouds',
+        '04d': 'clouds', '04n': 'clouds',
+        '09d': 'rain', '09n': 'rain',
+        '10d': 'rain', '10n': 'rain',
+        '11d': 'thunder', '11n': 'thunder',
+        '13d': 'snow', '13n': 'snow',
+        '50d': 'mist', '50n': 'mist'
     };
     return iconMap[iconCode] || 'clear';
 }
 
+// Function to update detailed weather information
 function updateWeatherDetails(data) {
     const detailsItems = weatherDetails.querySelectorAll('.weather-details-item');
     
     // Update Wind Status
     detailsItems[0].querySelector('.number').innerHTML = `${data.wind.speed.toFixed(2)}<span>m/s</span>`;
-    detailsItems[0].querySelector('li:last-child').textContent = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+    detailsItems[0].querySelector('li:last-child').textContent = getWindDescription(data.wind.speed);
     
     // Update Humidity
     detailsItems[1].querySelector('.number').innerHTML = `${data.main.humidity}<span>%</span>`;
@@ -182,19 +169,19 @@ function updateWeatherDetails(data) {
     
     // Update Visibility
     detailsItems[2].querySelector('.number').innerHTML = `${(data.visibility / 1000).toFixed(1)}<span>km</span>`;
-    detailsItems[2].querySelector('li:last-child').textContent = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+    detailsItems[2].querySelector('li:last-child').textContent = getVisibilityDescription(data.visibility);
     
     // Update Pressure
-    detailsItems[3].querySelector('li:first-child').textContent = 'Pressure';
     detailsItems[3].querySelector('.number').innerHTML = `${data.main.pressure}<span>hPa</span>`;
     detailsItems[3].querySelector('li:last-child').textContent = getPressureDescription(data.main.pressure);
 
-    // Force a reflow to ensure the DOM updates
+    // Force DOM update
     weatherDetails.style.display = 'none';
     weatherDetails.offsetHeight; // Trigger reflow
     weatherDetails.style.display = '';
 }
 
+// Helper functions to get descriptions for weather details
 function getHumidityDescription(humidity) {
     if (humidity < 30) return 'Low humidity';
     if (humidity < 60) return 'Comfortable humidity';
@@ -207,16 +194,29 @@ function getPressureDescription(pressure) {
     return 'Normal pressure';
 }
 
+function getWindDescription(windSpeed) {
+    if (windSpeed < 0.5) return 'Calm';
+    if (windSpeed < 3.3) return 'Light air';
+    if (windSpeed < 5.5) return 'Light breeze';
+    if (windSpeed < 7.9) return 'Gentle breeze';
+    if (windSpeed < 10.7) return 'Moderate breeze';
+    if (windSpeed < 13.8) return 'Fresh breeze';
+    return 'Strong breeze or higher';
+}
+
+function getVisibilityDescription(visibility) {
+    const visibilityKm = visibility / 1000;
+    if (visibilityKm < 1) return 'Very poor visibility';
+    if (visibilityKm < 4) return 'Poor visibility';
+    if (visibilityKm < 10) return 'Moderate visibility';
+    if (visibilityKm < 20) return 'Good visibility';
+    return 'Excellent visibility';
+}
+
 // Automatically get user's location and update weather on page load
 navigator.geolocation.getCurrentPosition(success, error);
 
-function error() {
-    console.log('Error getting location');
-}
-
-
-
-// Define an array of countries, temperatures, and icons
+// Define an array of countries and their cities for the 'Other Countries' section
 const countries = [
     { name: 'UAE', city: 'Dubai' },
     { name: 'USA', city: 'New York' },
@@ -228,6 +228,7 @@ const countries = [
     { name: 'South Africa', city: 'Cape Town' },
 ];
 
+// Array of weather icon paths
 const weatherIcons = [
     './Assets/images/weather images/clouds.png',
     './Assets/images/weather images/clear.png',
@@ -238,7 +239,7 @@ const weatherIcons = [
     './Assets/images/weather images/mist.png'
 ];
 
-// Get the other countries items
+// Select all 'Other Countries' items in the DOM
 const otherCountriesItems = document.querySelectorAll('.other-countries-item');
 
 // Function to fetch weather data for a single city
@@ -254,13 +255,7 @@ async function fetchWeatherData(city) {
     };
 }
 
-// Function to fetch weather data for all countries
-async function fetchAllWeatherData() {
-    const promises = countries.map(country => fetchWeatherData(country.city));
-    return Promise.all(promises);
-}
-
-// Function to shuffle an array
+// Function to shuffle an array randomly
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -269,13 +264,14 @@ function shuffleArray(array) {
     return array;
 }
 
-// Modified function to update the other countries items
+// Function to update the 'Other Countries' section
 async function updateOtherCountries() {
     try {
-        // Shuffle the countries array
+        // Shuffle the countries array and select the first 8
         const shuffledCountries = shuffleArray([...countries]);
         const weatherData = await Promise.all(shuffledCountries.slice(0, 8).map(country => fetchWeatherData(country.city)));
         
+        // Update each 'Other Countries' item with fetched data
         shuffledCountries.slice(0, 8).forEach((country, index) => {
             if (otherCountriesItems[index]) {
                 const imgElement = otherCountriesItems[index].querySelector('img');
@@ -285,13 +281,14 @@ async function updateOtherCountries() {
 
                 const { temperature, icon, high, low } = weatherData[index];
 
-                // Use the Image constructor to preload the image
+                // Preload and set the weather icon
                 const img = new Image();
                 img.onload = function() {
                     imgElement.src = this.src;
                 };
                 img.src = `./Assets/images/weather images/${icon}.png`;
 
+                // Update temperature, country name, and high/low temperatures
                 tempElement.textContent = `${temperature}°`;
                 nameElement.textContent = country.name;
                 highLowElement.textContent = `H:${high}° L:${low}°`;
@@ -302,23 +299,21 @@ async function updateOtherCountries() {
     }
 }
 
-// Update the other countries items every 30 seconds
+// Update 'Other Countries' section every 30 seconds
 setInterval(updateOtherCountries, 30000);
 
-// Initial update
+// Initial update of 'Other Countries' section
 updateOtherCountries();
 
-
-
-// get the daily report items
+// Select all daily report items in the DOM
 const dailyReportItems = document.querySelectorAll('.daily-report-item');
 
-// function to get a random weather icon
+// Function to get a random weather icon
 function getRandomWeatherIcon() {
     return weatherIcons[Math.floor(Math.random() * weatherIcons.length)];
 }
 
-// function to update the daily report items    
+// Function to update the daily report items (placeholder functionality)
 function updateDailyReport() {
     dailyReportItems.forEach((item, index) => {
         item.querySelector('img').src = getRandomWeatherIcon();
@@ -327,7 +322,5 @@ function updateDailyReport() {
     });
 }
 
-
-   
-
-    
+// Note: The updateDailyReport function is not called in this code snippet.
+// Consider implementing a proper forecast API call to populate this section with real data.
